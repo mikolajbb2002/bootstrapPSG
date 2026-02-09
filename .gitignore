@@ -10,9 +10,6 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-# Sensitive/locals
-*.tfvars
-*.tfvars.json
 
 # Plan files
 *.tfplan
