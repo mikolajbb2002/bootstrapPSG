@@ -1,4 +1,4 @@
-name: Boostrap for Azure infra
+name: Boostrap for Azure infra 
 
 on:
     push: 
