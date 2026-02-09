@@ -4,12 +4,6 @@ on:
     push: 
         branches:
            -  main
-    workflow_dispatch:
-        inputs: 
-            bootstrap: 
-                description: Run bootsrap
-                required: false
-                type: boolean
 
 permissions:
   id-token: write
@@ -22,7 +16,6 @@ env:
    AZURE_SUB_ID: ${{secrets.AZURE_SUB_ID}}
 jobs:
   bootstrap:
-    if: ${{ github.event.inputs.bootstrap == 'true' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
