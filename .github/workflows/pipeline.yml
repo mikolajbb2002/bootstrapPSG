@@ -24,6 +24,10 @@ env:
    AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
    AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
    AZURE_SUB_ID: ${{secrets.AZURE_SUB_ID}}
+   TF_STATE_RG: ${{ vars.TF_STATE_RG }}
+   TF_STATE_SA: ${{ vars.TF_STATE_SA }}
+   TF_STATE_CONTAINER: ${{ vars.TF_STATE_CONTAINER }}
+   TF_STATE_KEY: ${{ vars.TF_STATE_KEY }}
 jobs:
   bootstrap:
     runs-on: ubuntu-latest
@@ -41,7 +45,12 @@ jobs:
        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
        subscription-id: ${{ secrets.AZURE_SUB_ID }}
     - uses: hashicorp/setup-terraform@v3
-    - run: terraform init -input=false 
+    - run: |
+        terraform init -input=false \
+          -backend-config="resource_group_name=${{ env.TF_STATE_RG }}" \
+          -backend-config="storage_account_name=${{ env.TF_STATE_SA }}" \
+          -backend-config="container_name=${{ env.TF_STATE_CONTAINER }}" \
+          -backend-config="key=${{ env.TF_STATE_KEY }}"
       working-directory: ${{ vars.TF_WORKDIR }}
     - run: terraform plan -input=false
       working-directory: ${{ vars.TF_WORKDIR }}
@@ -64,7 +73,12 @@ jobs:
        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
        subscription-id: ${{ secrets.AZURE_SUB_ID }}
     - uses: hashicorp/setup-terraform@v3
-    - run: terraform init -input=false 
+    - run: |
+        terraform init -input=false \
+          -backend-config="resource_group_name=${{ env.TF_STATE_RG }}" \
+          -backend-config="storage_account_name=${{ env.TF_STATE_SA }}" \
+          -backend-config="container_name=${{ env.TF_STATE_CONTAINER }}" \
+          -backend-config="key=${{ env.TF_STATE_KEY }}"
       working-directory: ${{ vars.TF_WORKDIR }}
     - run: terraform apply -input=false -auto-approve
       working-directory: ${{ vars.TF_WORKDIR }}
@@ -80,5 +94,12 @@ jobs:
        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
        subscription-id: ${{ secrets.AZURE_SUB_ID }}
     - uses: hashicorp/setup-terraform@v3
+    - run: |
+        terraform init -input=false \
+          -backend-config="resource_group_name=${{ env.TF_STATE_RG }}" \
+          -backend-config="storage_account_name=${{ env.TF_STATE_SA }}" \
+          -backend-config="container_name=${{ env.TF_STATE_CONTAINER }}" \
+          -backend-config="key=${{ env.TF_STATE_KEY }}"
+      working-directory: ${{ vars.TF_WORKDIR }}
     - run: terraform destroy -input=false 
       working-directory: ${{ vars.TF_WORKDIR }}
