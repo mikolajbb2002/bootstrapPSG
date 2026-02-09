@@ -52,6 +52,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Unlock git-crypt
+      run: |
+        echo "${{ secrets.GIT_CRYPT_KEY_B64 }}" | base64 -d > /tmp/git-crypt.key
+        git-crypt unlock /tmp/git-crypt.key
     - uses: azure/login@v2
       with:
        client-id: ${{ secrets.AZURE_CLIENT_ID }}
