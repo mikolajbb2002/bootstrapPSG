@@ -31,6 +31,7 @@ jobs:
         echo "${{ secrets.GIT_CRYPT_KEY_B64 }}" | base64 -d > /tmp/git-crypt.key
         git-crypt unlock /tmp/git-crypt.key
     - uses: azure/login@v2
+      
     - uses: hashicorp/setup-terraform@v3
     - run: terraform init -input=false 
       working-directory: ${{ vars.TF_WORKDIR }}
