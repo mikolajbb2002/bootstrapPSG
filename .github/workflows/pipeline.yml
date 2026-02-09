@@ -1,0 +1,38 @@
+name: Boostrap for Azure infra
+
+on:
+    push: 
+        branches:
+           -  main
+    workflow_dispatch:
+        inputs: 
+            bootstrap: 
+                description: Run bootsrap
+                required: false
+                type: boolean
+
+permissions:
+  id-token: write
+  contents: read
+
+env: 
+   TF_WORKDIR: ${{ vars.TF_WORKDIR }}
+
+jobs:
+  bootstrap:
+    if: ${{ github.event.inputs.bootstrap == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install git-crypt
+      run: sudo apt-get update && sudo apt-get install -y git-crypt
+    - name: Unlock git-crypt
+      run: |
+        echo "${{ secrets.GIT_CRYPT_KEY_B64 }}" | base64 -d > /tmp/git-crypt.key
+        git-crypt unlock /tmp/git-crypt.key
+    - uses: azure/login@v2
+    - uses: hashicorp/setup-terraform@v3
+    - run: terraform init -input=false 
+      working-directory: ${{ vars.TF_WORKDIR }}
+    - run: terraform apply -input=false -auto-approve
+      working-directory: ${{ vars.TF_WORKDIR }}
