@@ -42,9 +42,9 @@ jobs:
        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
        subscription-id: ${{ secrets.AZURE_SUB_ID }}
     - uses: hashicorp/setup-terraform@v3
-    - run: terraform init -input=false -backend=false
+    - run: terraform init -input=false -backend=false -reconfigure
       working-directory: ${{ vars.TF_WORKDIR }}
-    - run: terraform plan -input=false -backend=false
+    - run: terraform plan -input=false
       working-directory: ${{ vars.TF_WORKDIR }}
 
   apply:
