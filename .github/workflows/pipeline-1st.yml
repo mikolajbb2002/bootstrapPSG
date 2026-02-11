@@ -67,7 +67,7 @@ jobs:
     - run: terraform -chdir=${{ vars.TF_WORKDIR }} apply -input=false -auto-approve
     - name: Terraform migrate state to remote backend
       run: |
-        terraform -chdir=${{ vars.TF_WORKDIR }} init -reconfigure -migrate-state \
+        terraform -chdir=${{ vars.TF_WORKDIR }} init -migrate-state \
           -backend-config="resource_group_name=${{ env.TF_STATE_RG }}" \
           -backend-config="storage_account_name=${{ env.TF_STATE_SA }}" \
           -backend-config="container_name=${{ env.TF_STATE_CONTAINER }}" \
