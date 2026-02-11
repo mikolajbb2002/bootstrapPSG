@@ -44,7 +44,7 @@ jobs:
     - uses: hashicorp/setup-terraform@v3
     - run: terraform init -input=false -backend=false
       working-directory: ${{ vars.TF_WORKDIR }}
-    - run: terraform plan -input=false
+    - run: terraform plan -input=false -backend=false
       working-directory: ${{ vars.TF_WORKDIR }}
 
   apply:
