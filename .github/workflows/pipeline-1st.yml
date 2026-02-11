@@ -1,4 +1,4 @@
-name: Boostrap for Azure infra
+name: Boostrap for Azure infra (1st take)
 
 on:
     workflow_dispatch:
