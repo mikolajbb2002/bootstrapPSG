@@ -43,7 +43,13 @@ variable "applz_storage_container_name" {
   description = "Storage container name for Terraform state."
 }
 
+variable "runners_storage_container_name" {
+  type        = string
+  description = "Storage container name for Terraform state."
+}
+
 variable "storage_container_access_type" {
     type        = string
   description = "Storage container name for Terraform state."
 }
+
