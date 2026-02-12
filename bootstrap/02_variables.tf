@@ -28,11 +28,6 @@ variable "storage_replication_type" {
   description = "Storage account replication type."
 }
 
-variable "core_storage_container_name" {
-  type        = string
-  description = "Storage container name for Terraform state."
-}
-
 variable "platformlz_storage_container_name" {
   type        = string
   description = "Storage container name for Terraform state."

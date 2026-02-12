@@ -11,12 +11,6 @@ resource "azurerm_storage_account" "storage" {
   account_replication_type = var.storage_replication_type
 }
 
-resource "azurerm_storage_container" "core" {
-  storage_account_id  = azurerm_storage_account.storage.id
-  name                  = var.core_storage_container_name
-  container_access_type = var.storage_container_access_type
-}
-
 resource "azurerm_storage_container" "runners" {
   storage_account_id  = azurerm_storage_account.storage.id
   name                  = var.runners_storage_container_name
