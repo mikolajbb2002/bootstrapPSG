@@ -1,5 +1,5 @@
 terraform {
- # backend "azurerm" {} po 1 wlaczamy
+ # backend "azurerm" {} 
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
