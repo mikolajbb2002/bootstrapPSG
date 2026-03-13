@@ -28,23 +28,27 @@ variable "storage_replication_type" {
   description = "Storage account replication type."
 }
 
-variable "platformlz_storage_container_name" {
+variable "governance_storage_container_name" {
   type        = string
   description = "Storage container name for Terraform state."
 }
 
-variable "applz_storage_container_name" {
+variable "connectivity_storage_container_name" {
   type        = string
   description = "Storage container name for Terraform state."
 }
 
-variable "runners_storage_container_name" {
+variable "management_storage_container_name" {
+  type        = string
+  description = "Storage container name for Terraform state."
+}
+
+variable "workloads_storage_container_name" {
   type        = string
   description = "Storage container name for Terraform state."
 }
 
 variable "storage_container_access_type" {
-    type        = string
-  description = "Storage container name for Terraform state."
+  type        = string
+  description = "Storage container access type"
 }
-

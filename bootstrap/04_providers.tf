@@ -8,10 +8,7 @@ terraform {
 }
 
 provider "azurerm" {
-  features {
-
-  }
-  subscription_id = var.subid
-
-  # Configuration options
+  features {}
+  subscription_id     = var.subid
+  storage_use_azuread = true
 }

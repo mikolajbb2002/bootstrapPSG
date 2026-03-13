@@ -11,20 +11,26 @@ resource "azurerm_storage_account" "storage" {
   account_replication_type = var.storage_replication_type
 }
 
-resource "azurerm_storage_container" "runners" {
-  storage_account_id  = azurerm_storage_account.storage.id
-  name                  = var.runners_storage_container_name
+resource "azurerm_storage_container" "governance" {
+  storage_account_id    = azurerm_storage_account.storage.id
+  name                  = var.governance_storage_container_name
   container_access_type = var.storage_container_access_type
 }
 
-resource "azurerm_storage_container" "platformlz" {
-  storage_account_id  = azurerm_storage_account.storage.id
-  name                  = var.platformlz_storage_container_name
+resource "azurerm_storage_container" "connectivity" {
+  storage_account_id    = azurerm_storage_account.storage.id
+  name                  = var.connectivity_storage_container_name
   container_access_type = var.storage_container_access_type
 }
 
-resource "azurerm_storage_container" "applz" {
-  storage_account_id  = azurerm_storage_account.storage.id
-  name                  = var.applz_storage_container_name
+resource "azurerm_storage_container" "management" {
+  storage_account_id    = azurerm_storage_account.storage.id
+  name                  = var.management_storage_container_name
+  container_access_type = var.storage_container_access_type
+}
+
+resource "azurerm_storage_container" "workloads" {
+  storage_account_id    = azurerm_storage_account.storage.id
+  name                  = var.workloads_storage_container_name
   container_access_type = var.storage_container_access_type
 }
