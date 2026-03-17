@@ -52,3 +52,20 @@ variable "storage_container_access_type" {
   type        = string
   description = "Storage container access type"
 }
+
+variable "kv_rg_name" {
+  type        = string
+  description = "Resource group for keyvault name"
+}
+
+variable "kv_name" {
+  type        = string
+  description = "keyvault name"
+}
+
+variable "kv_secrets" {
+  type        = map(string)
+  description = "Map of secrets to create in the bootstrap Key Vault (name => value)."
+  default     = {}
+  sensitive   = true
+}
