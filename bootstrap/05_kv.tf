@@ -38,8 +38,9 @@ resource "azurerm_key_vault" "main" {
 }
 
 resource "azurerm_key_vault_secret" "bootstrap" {
-  for_each     = var.kv_secrets
+  # var.kv_secrets is marked sensitive, so we only use its (non-sensitive) keys for for_each.
+  for_each     = toset(keys(nonsensitive(var.kv_secrets)))
   key_vault_id = azurerm_key_vault.main.id
   name         = each.key
-  value        = each.value
+  value        = var.kv_secrets[each.key]
 }
